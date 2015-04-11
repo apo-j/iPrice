@@ -3,7 +3,10 @@
  */
 angular.module('iPrice.controllers', [])
     .controller('HomeCtrl', ['$scope','$state', function($scope, $state){
-
+        $scope.loadPub = function(){
+            window.open('http://www.lemonde.fr', '_system', 'location=yes');
+            return false;
+        }
     }])
     .controller('DashCtrl', function($scope) {})
 
