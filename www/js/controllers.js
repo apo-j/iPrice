@@ -30,20 +30,24 @@ angular.module('iPrice.controllers', [])
         });
     }])
 
-    .controller('RubricDetailCtrl',  ['$scope','$stateParams','RubricsSvc', '_','$state',function($scope, $stateParams, RubricsSvc, _, $state) {
-        RubricsSvc.get($stateParams.id).then(function(data){
-            $scope.products = _.groupBy(data.data, function(item){
-                return item.brand;
-            });
+    .controller('ProductListCtrl',  ['$scope','$stateParams','ProductsSvc', '_','$state',function($scope, $stateParams, ProductsSvc, _, $state) {
+		$scope.category = $state.current.data.tab;
 
-            $scope.brands = _.sortBy(Object.keys($scope.products), function(brand){ return brand;});
+		ProductsSvc.getByCategory($scope.category, $stateParams.id).then(function(data){
+			$scope.products = _.groupBy(data.data, function(item){
+				return item.brand;
+			});
+		
+			$scope.brands = _.sortBy(Object.keys($scope.products), function(brand){ 
+				return brand;
+			});
 
-            if(data.data && data.data[0]){
-                $scope.title = data.data[0].rubric;
-            }else{
-                $scope.title = undefined;
-            }
-        });
+			if(a instanceof Array && data.data[0]){
+				$scope.title = data.data[0][$scope.category];
+			}else{
+				$scope.title = undefined;
+			}
+		});
     }])
 
     .controller('ProductDetailCtrl',  ['$scope','$stateParams','ProductsSvc','$ionicSlideBoxDelegate',function($scope, $stateParams, ProductsSvc, $ionicSlideBoxDelegate) {

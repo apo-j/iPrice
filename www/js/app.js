@@ -95,16 +95,19 @@ angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services','iPri
                     }
                 }
             })
-            .state('home.rubrics-detail', {
+            .state('home.rubrics-products', {
                 url: '/rubrics/:id',
                 views: {
                     'home-rubrics': {
-                        templateUrl: 'templates/rubric-detail.html',
-                        controller: 'RubricDetailCtrl'
+						data:{
+							category:'rubric'
+						},
+                        templateUrl: 'templates/products-list.html',
+                        controller: 'ProductListCtrl'
                     }
                 }
             })
-            .state('home.rubrics-products', {
+            .state('home.rubrics-product', {
                 url: '/products/:id',
                 views: {
                     'home-rubrics': {
@@ -122,7 +125,19 @@ angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services','iPri
                     }
                 }
             })
-            .state('home.brands-products', {
+			.state('home.brands-products', {
+                url: '/brands/:id',
+                views: {
+                    'home-brands': {
+						data:{
+							category:'brand'
+						},
+                        templateUrl: 'templates/products-list.html',
+                        controller: 'ProductListCtrl'
+                    }
+                }
+            })
+            .state('home.brands-product', {
                 url: '/products/:id',
                 views: {
                     'home-brands': {

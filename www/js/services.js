@@ -47,23 +47,7 @@ angular.module('iPrice.services', [])
       return res;
     }])
     .factory('RubricsSvc', ['$http','$q', function($http, $q){
-
       var res = {};
-      var url = 'api/rubrics.json';
-
-      //if current <= 0, get the latest number news
-      //else get all news after current one
-      res.all = function(){//每次获取的新闻数
-        var deferred = $q.defer();
-        $http({method: 'GET', url: url}).
-            success(function(data, status) {
-              deferred.resolve({data: data, status: status});
-            }).
-            error(function(data, status) {
-              deferred.reject({data: data, status: status});
-            });
-        return deferred.promise;
-      };
 
       res.get = function(id){
         var deferred = $q.defer();
@@ -78,11 +62,24 @@ angular.module('iPrice.services', [])
       }
       return res;
     }])
+
     .factory('ProductsSvc', ['$http','$q', function($http, $q){
 
       var res = {};
       var url = 'api/products/{id}.json';
 
+	  res.getByCategory = function(category, id){//category can be brands or rubrics here
+        var deferred = $q.defer();
+		
+        $http({method: 'GET', url: 'api/{category}/{id}.json'.replace(/\{id\}/ig, id).replace(/\{category\}/ig, category)}).
+            success(function(data, status) {
+              deferred.resolve({data: data, status: status});
+            }).
+            error(function(data, status) {
+              deferred.reject({data: data, status: status});
+            });
+        return deferred.promise;
+      }
       res.get = function(id){
         var deferred = $q.defer();
         $http({method: 'GET', url: url.replace(/\{id\}/ig, id)}).
