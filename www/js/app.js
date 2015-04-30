@@ -3,11 +3,42 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services'])
+angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services','iPrice.filters'])
     .constant('afConfig', config)
-.run(['$ionicPlatform', '$rootScope','afConfig','$location', function($ionicPlatform, $rootScope, afConfig, $location) {
-      $rootScope.config = afConfig;
+
+.run(['$ionicPlatform', '$rootScope','afConfig','$state', '$rootScope', function($ionicPlatform, $rootScope, afConfig, $state, $rootScope) {
+      //init $rootScope utilities
+        $rootScope.config = afConfig;
+
   $ionicPlatform.ready(function() {
+      //admob configuration
+      if(window.AdMob) {
+          var admobId;
+
+          if ( /(android)/i.test(navigator.userAgent) ) {
+              admobId = {
+                  banner:"ANDROID_PUBLISHER_KEY",
+                  intersitial:"ANDROID_PUBLISHER_KEY"
+              };
+          } else if( /(ipod|iphone|ipad)/i.test(navigator.userAgent) ) {
+              admobId = {
+                  banner:"ca-app-pub-3349787729360682/9138553652",
+                  intersitial:"ca-app-pub-3349787729360682/3092020058"
+              };
+          }
+
+          window.AdMob.createBanner({
+              'adId': admobId.banner,
+              'position': window.AdMob.AD_POSITION.BOTTOM_CENTER,
+              'autoShow': true
+          });
+
+          window.AdMob.prepareInterstitial( {adId:admobId.intersitial, autoShow:false} );
+
+          if(window.AdMob){
+              document.addEventListener('onAdLoaded', window.AdMob.showInterstitial);
+          }
+      }
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -16,10 +47,13 @@ angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services'])
     if(window.StatusBar) {
         StatusBar.styleLightContent();
     }
+
+      $state.go('home.news');
   });
 }])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
@@ -27,51 +61,82 @@ angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services'])
         // Each state's controller can be found in controllers.js
 
         $stateProvider
-            .state('home', {
-                url:'/',
-                templateUrl:'templates/home.html',
-                controller:'HomeCtrl'
-            })
         // setup an abstract state for the tabs directive
-            .state('tab', {
-                url:'/tab',
+            .state('home', {
+                url:'/home',
                 abstract:true,
-                templateUrl:'templates/tabs.html'
+                templateUrl:'templates/home.html'
             })
         // Each tab has its own nav history stack:
-            .state('tab.dash', {
-                url:'/dash',
+            .state('home.news', {
+                url:'/news',
                 views:{
-                    'tab-dash':{
-                        templateUrl:'templates/tab-dash.html',
-                        controller:'DashCtrl'
+                    'home-news':{
+                        templateUrl:'templates/home-news.html',
+                        controller:'NewsCtrl'
                     }
                 }
             })
-            .state('tab.chats', {
-                url: '/chats',
+            .state('home.news-detail', {
+                url: '/news/:id',
                 views: {
-                    'tab-chats': {
-                        templateUrl: 'templates/tab-chats.html',
-                        controller: 'ChatsCtrl'
+                    'home-news': {
+                        templateUrl: 'templates/news-detail.html',
+                        controller: 'NewsDetailCtrl'
                     }
                 }
             })
-            .state('tab.chat-detail', {
-                url: '/chats/:chatId',
+            .state('home.rubrics', {
+                url:'/rubrics',
+                views:{
+                    'home-rubrics':{
+                        templateUrl:'templates/home-rubrics.html',
+                        controller:'RubricsCtrl'
+                    }
+                }
+            })
+            .state('home.rubrics-detail', {
+                url: '/rubrics/:id',
                 views: {
-                    'tab-chats': {
-                        templateUrl: 'templates/chat-detail.html',
-                        controller: 'ChatDetailCtrl'
+                    'home-rubrics': {
+                        templateUrl: 'templates/rubric-detail.html',
+                        controller: 'RubricDetailCtrl'
+                    }
+                }
+            })
+            .state('home.rubrics-products', {
+                url: '/products/:id',
+                views: {
+                    'home-rubrics': {
+                        templateUrl: 'templates/product-detail.html',
+                        controller: 'ProductDetailCtrl'
+                    }
+                }
+            })
+            .state('home.brands', {
+                url: '/brands',
+                views: {
+                    'home-brands': {
+                        templateUrl: 'templates/home-brands.html',
+                        controller: 'BrandsCtrl'
+                    }
+                }
+            })
+            .state('home.brands-products', {
+                url: '/products/:id',
+                views: {
+                    'home-brands': {
+                        templateUrl: 'templates/product-detail.html',
+                        controller: 'ProductDetailCtrl'
                     }
                 }
             })
 
-            .state('tab.account', {
+            .state('home.account', {
                 url: '/account',
                 views: {
-                    'tab-account': {
-                        templateUrl: 'templates/tab-account.html',
+                    'home-account': {
+                        templateUrl: 'templates/home-account.html',
                         controller: 'AccountCtrl'
                     }
                 }
@@ -79,6 +144,6 @@ angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services'])
         );
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/news');
 
     }])

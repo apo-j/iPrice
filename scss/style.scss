@@ -1,0 +1,53 @@
+.input-delete-btn:before{
+  font-size:20px !important;
+}
+
+.news{
+  .list.card{
+    padding: 0px !important;
+    position: relative;
+    box-shadow: none !important;
+    margin: 5px 0px 0px 0px;
+    img{
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .overlay-title{
+      bottom: 5px;
+      font-size: 20px;
+      position: absolute;
+      padding:10px;
+      font-weight: bold;
+      color:#FFF;
+      z-index: 10;
+      background-color:#000;
+      opacity: 0.6;
+      width:100%;
+    }
+  }
+  .list.card:first-child{
+    margin-top: 0 !important;
+  }
+}
+
+.iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}

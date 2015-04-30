@@ -1,0 +1,16 @@
+<ion-view view-title="资讯">
+  <ion-content class="news" scroll="true">
+    <ion-refresher
+            pulling-text="下拉刷新"
+            on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <div class="list card" ng-repeat="item in news">
+        <a href="#/home/news/{{item.id}}">
+          <img ng-src="{{item.image}}">
+          <div class="overlay-title">{{item.title}}</div>
+        </a>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,4 +1,10 @@
 {
   "name": "iPrice",
-  "app_id": "d59bbd80"
+  "app_id": "54f89256",
+  "proxies": [
+    {
+      "path": "/api",
+      "options": "http://www.geocities.ws/iprice/api"
+    }
+  ]
 }
