@@ -31,8 +31,8 @@ angular.module('iPrice.controllers', [])
     }])
 
     .controller('ProductListCtrl',  ['$scope','$stateParams','ProductsSvc', '_','$state',function($scope, $stateParams, ProductsSvc, _, $state) {
-		$scope.category = $state.current.data.tab;
-
+		$scope.category = $state.current.data.category;
+        $scope.detailUrl = '';
 		ProductsSvc.getByCategory($scope.category, $stateParams.id).then(function(data){
 			$scope.products = _.groupBy(data.data, function(item){
 				return item.brand;
@@ -42,8 +42,13 @@ angular.module('iPrice.controllers', [])
 				return brand;
 			});
 
-			if(a instanceof Array && data.data[0]){
+			if(data.data instanceof Array && data.data[0]){
 				$scope.title = data.data[0][$scope.category];
+                if($state.current.data.category == 'rubric'){
+                    $scope.detailUrl = "#/home/rubrics-products/";
+                }else{
+                    $scope.detailUrl = "#/home/brands-products/";
+                }
 			}else{
 				$scope.title = undefined;
 			}
@@ -51,6 +56,8 @@ angular.module('iPrice.controllers', [])
     }])
 
     .controller('ProductDetailCtrl',  ['$scope','$stateParams','ProductsSvc','$ionicSlideBoxDelegate',function($scope, $stateParams, ProductsSvc, $ionicSlideBoxDelegate) {
+
+
         ProductsSvc.get($stateParams.id).then(function(data){
             $scope.product = data.data;
             $ionicSlideBoxDelegate.update();

@@ -5,7 +5,7 @@
     <ion-content scroll="true">
         <ion-list >
             <div ng-repeat="brand in brands">
-                <ion-item class="item-avatar item-icon-right" ng-repeat="product in products[brand]" type="item-text-wrap" href="#/home/products/{{product.id}}">
+                <ion-item class="item-avatar item-icon-right" ng-repeat="product in products[brand]" type="item-text-wrap" href="{{detailUrl}}{{product.id}}">
                     <img ng-src="{{product.image}}">
                     <h2>{{product.title}}</h2>
                     <p>{{product.brand}}</p>

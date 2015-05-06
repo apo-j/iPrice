@@ -48,6 +48,19 @@ angular.module('iPrice.services', [])
     }])
     .factory('RubricsSvc', ['$http','$q', function($http, $q){
       var res = {};
+      var url = 'api/rubrics.json';
+
+      res.all = function(){//每次获取的新闻数
+        var deferred = $q.defer();
+        $http({method: 'GET', url: url}).
+            success(function(data, status) {
+              deferred.resolve({data: data, status: status});
+            }).
+            error(function(data, status) {
+              deferred.reject({data: data, status: status});
+            });
+        return deferred.promise;
+      };
 
       res.get = function(id){
         var deferred = $q.defer();
@@ -66,7 +79,7 @@ angular.module('iPrice.services', [])
     .factory('ProductsSvc', ['$http','$q', function($http, $q){
 
       var res = {};
-      var url = 'api/products/{id}.json';
+      var url = 'api/product/{id}.json';
 
 	  res.getByCategory = function(category, id){//category can be brands or rubrics here
         var deferred = $q.defer();
