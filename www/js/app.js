@@ -3,12 +3,15 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services','iPrice.filters'])
+angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services','iPrice.filters', 'lokijs'])
     .constant('afConfig', config)
 
-.run(['$ionicPlatform', '$rootScope','afConfig','$state', '$rootScope', function($ionicPlatform, $rootScope, afConfig, $state, $rootScope) {
+.run(['$ionicPlatform', '$rootScope','afConfig','$state', '$rootScope', 'DataSvc', function($ionicPlatform, $rootScope, afConfig, $state, $rootScope, DataSvc, $http) {
       //init $rootScope utilities
         $rootScope.config = afConfig;
+        DataSvc.dataReady.then(function(){
+            $state.go('home.news');
+        }, function(){});
 
   $ionicPlatform.ready(function() {
       //admob configuration
@@ -47,8 +50,6 @@ angular.module('iPrice', ['ionic', 'iPrice.controllers', 'iPrice.services','iPri
     if(window.StatusBar) {
         StatusBar.styleLightContent();
     }
-
-      $state.go('home.news');
   });
 }])
 

@@ -56,10 +56,9 @@ angular.module('iPrice.controllers', [])
     }])
 
     .controller('ProductDetailCtrl',  ['$scope','$stateParams','ProductsSvc','$ionicSlideBoxDelegate',function($scope, $stateParams, ProductsSvc, $ionicSlideBoxDelegate) {
-
-
         ProductsSvc.get($stateParams.id).then(function(data){
             $scope.product = data.data;
+            $scope.prices = Object.keys(data.data.prices || {});
             $ionicSlideBoxDelegate.update();
         });
     }])
@@ -69,22 +68,19 @@ angular.module('iPrice.controllers', [])
             $scope.$hasHeader = true;
         });
 
-        var brands = []
-
         BrandsSvc.all().then(function(data){
-            $scope.brands = brands = data.data;
+            $scope.brands = data.data;
         });
+
+        $scope.products = [];
 
         $scope.query = {term:undefined};
 
-        $scope.search = function(){
-            $scope.brands = _.filter(brands,function(brand){
-                if(brand.keywords){
-                    var re = new RegExp($scope.query.term, 'gi');
-                    return re.test(brand.keywords);
-                }else{
-                    return false;
-                }})};
+        $scope.search = function() {
+            var res  = BrandsSvc.search($scope.query.term);
+            $scope.brands = res.brands;
+            $scope.products = res.products;
+        }
 
         $scope.clearQuery = function(){
             $scope.query.term = undefined;

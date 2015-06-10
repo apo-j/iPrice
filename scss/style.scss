@@ -1,3 +1,5 @@
+$big-bg:      '../img/bg.png';
+
 .input-delete-btn:before{
   font-size:20px !important;
 }
@@ -50,4 +52,38 @@
   &:after {
     clear: both;
   }
+}
+
+.scroll-bg {
+  background: url($big-bg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+ion-tabs.tabs-color-active-energized .tab-item {
+  color: white;
+}
+
+.bar.bar-stable .title {
+  color: #FFCB4F;
+}
+
+h1, h2, h3, h4, h5, h6{
+  color: #FFCB4F;
+}
+
+.brand, .rubric{
+  h1,h2,h3,h4,h5,h6{
+    font-weight: bold;
+  }
+}
+
+.item-icon-left .icon-accessory, .item-icon-right .icon-accessory {
+  color: #FFCB4F;
+}
+
+.rubric .item-content h2{
+  line-height: 40px;
+}
+.bar.bar-header button{
+  color:white !important;
 }

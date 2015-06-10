@@ -2,39 +2,39 @@
     <ion-nav-title>
         {{product.title}}
     </ion-nav-title>
-    <ion-content scroll="true">
+    <ion-content scroll="true" class="scroll-bg">
         <ion-slide-box show-pager="true">
-            <ion-slide style="width:100%;height:215px" ng-repeat="image in product.images">
-                <img ng-src="{{image}}">
+            <ion-slide style="width:100%;height:240px" ng-repeat="image in product.images">
+                <img ng-src="{{image}}" style="width:100%;height:100%">
             </ion-slide>
         </ion-slide-box>
         <ion-list>
-            <div class="list card">
-                <div class="item item-body">
+            <div class="" style="margin-top:5px;margin-bottom:5px">
+                <div class="item item-body scroll-bg" style="border:none;color:white;padding:0 5px 0 5px">
                     <div class="row">
-                        <div class="col">品牌</div>
+                        <div class="col col-25">品牌</div>
                         <div class="col">{{product.brand | stringNotEmpty}}</div>
                     </div>
                     <div class="row">
-                        <div class="col">编号</div>
+                        <div class="col col-25">编号</div>
                         <div class="col">{{product.reference | stringNotEmpty}}</div>
                     </div>
                     <div class="row">
-                        <div class="col">系列</div>
+                        <div class="col col-25">系列</div>
                         <div class="col">{{product.collection | stringNotEmpty}}</div>
                     </div>
                     <div class="row">
-                        <div class="col">单品描述</div>
+                        <div class="col col-25">单品描述</div>
                         <div class="col">{{product.description | stringNotEmpty}}</div>
                     </div>
                 </div>
             </div>
-            <div class="list card">
+            <div class="list card" ng-if="prices.length > 0">
                 <div class="item item-divider">全球官方售价</div>
-                <div class="item item-body">
-                    <div class="row" ng-repeat="price in product.prices">
-                        <div class="col">{{price.country}}</div>
-                        <div class="col">{{price.price}}</div>
+                <div class="item item-body" style="padding:0 7px 0 7px">
+                    <div class="row" ng-repeat="price in prices">
+                        <div class="col">{{price}}</div>
+                        <div class="col">{{product.prices[price]}}</div>
                     </div>
                 </div>
             </div>

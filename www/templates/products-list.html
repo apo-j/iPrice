@@ -2,11 +2,11 @@
     <ion-nav-title>
         {{title}}
     </ion-nav-title>
-    <ion-content scroll="true">
+    <ion-content scroll="true" class="scroll-bg">
         <ion-list >
             <div ng-repeat="brand in brands">
-                <ion-item class="item-avatar item-icon-right" ng-repeat="product in products[brand]" type="item-text-wrap" href="{{detailUrl}}{{product.id}}">
-                    <img ng-src="{{product.image}}">
+                <ion-item class="item-avatar item-stable product item-icon-right" ng-repeat="product in products[brand]" type="item-text-wrap" href="{{detailUrl}}{{product.id}}">
+                    <img ng-src="{{product.images[0]}}">
                     <h2>{{product.title}}</h2>
                     <p>{{product.brand}}</p>
                     <i class="icon ion-chevron-right icon-accessory"></i>

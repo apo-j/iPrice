@@ -1,0 +1,47 @@
+JSON_CALLBACK ([
+{
+"id": 1,
+"brand": "Gucci",
+"rubricImage":"https://c2.staticflickr.com/4/3676/9293547598_e0d44e4007_b.jpg",
+"title": "Bag 1",
+"rubric": "男士系列",
+"reference": "",
+"collection": "名贵皮质",
+"description": "最出名的皮质宝具，耐磨，抗压，具有很强的延展性",
+"prices":{
+  "法国": "123E",
+  "UK": "123磅"
+  },
+"images":["https://c4.staticflickr.com/4/3682/9411495050_9c57f6c7a1_b.jpg", "https://c2.staticflickr.com/4/3676/9293547598_e0d44e4007_b.jpg", "https://c1.staticflickr.com/9/8699/16986129498_aa3dc3a0c3_h.jpg"]
+},
+{
+"id": 2,
+"brand": "Channel",
+"rubricImage":"https://c2.staticflickr.com/4/3676/9293547598_e0d44e4007_b.jpg",
+"title": "Bag 2",
+"rubric": "男士系列",
+"reference": "",
+"collection": "名贵皮质",
+"description": "最出名的皮质宝具，耐磨，抗压，具有很强的延展性",
+"prices":{
+  "法国": "123E",
+  "UK": "123磅"
+  },
+"images":["https://c4.staticflickr.com/4/3682/9411495050_9c57f6c7a1_b.jpg", "https://c2.staticflickr.com/4/3676/9293547598_e0d44e4007_b.jpg", "https://c1.staticflickr.com/9/8699/16986129498_aa3dc3a0c3_h.jpg"]
+},
+{
+"id": 3,
+"brand": "Channel",
+"rubricImage":"https://c2.staticflickr.com/4/3676/9293547598_e0d44e4007_b.jpg",
+"title": "Bag 3",
+"rubric": "男士系列",
+"reference": "",
+"collection": "名贵皮质",
+"description": "最出名的皮质宝具，耐磨，抗压，具有很强的延展性",
+"prices":{
+  "法国": "123E",
+  "UK": "123磅"
+  },
+"images":["https://c4.staticflickr.com/4/3682/9411495050_9c57f6c7a1_b.jpg", "https://c2.staticflickr.com/4/3676/9293547598_e0d44e4007_b.jpg", "https://c1.staticflickr.com/9/8699/16986129498_aa3dc3a0c3_h.jpg"]
+}
+]);
